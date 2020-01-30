@@ -62,4 +62,16 @@ Nonetheless, in JDBC, the composite data types can be retried as Java objects an
 ```sql
 CREATE DOMAIN text_without_space_and_null AS TEXT NOT NULL CHECK (value 
 !~ '\s');
+
+CREATE SEQUENCE global_id_seq;
+CREATE DOMAIN global_id INT DEFAULT NEXTVAL('global_id_seq') NOT NULL;
+
+
+ALTER DOMAIN text_without_space_and_null ADD CONSTRAINT text_without_
+space_and_null_length_chk check (length(value)<=15);
+
+
+ALTER DOMAIN text_without_space_and_null ADD CONSTRAINT text_without_
+space_and_null_length_chk check (length(value)<=15) NOT VALID;
 ```
+

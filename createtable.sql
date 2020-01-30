@@ -75,3 +75,13 @@ from char_size_test;
 
 select *
 from generate_series(1, 100);
+
+
+CREATE FUNCTION test_security_definer () RETURNS TEXT AS $$
+SELECT 'current_user :'||current_user || ' session_user: ' || session_
+user; $$ LANGUAGE SQL SECURITY DEFINER;
+
+
+CREATE FUNCTION test_security_invoker () RETURNS TEXT AS $$
+SELECT 'current_user :'||current_user || ' session_user: ' || session_
+user; $$ LANGUAGE SQL SECURITY INVOKER

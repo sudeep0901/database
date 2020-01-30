@@ -31,9 +31,7 @@ select *
 from typesamples;
 
 
-create table lunch (myname varchar(50),
- borndate timestamp check (borndate > '1/1/1982') ,
-  lunchdate date, lunchtime time);
+create table lunch (myname varchar(50), borndate timestamp check (borndate > '1/1/1982') , lunchdate date, lunchtime time);
 
 
 insert into lunch (myname, borndate,lunchdate, lunchtime)
@@ -42,19 +40,22 @@ values('SUDEEP APTEL',
        'today',
        'allballs');
 
-select * from lunch;
 
+select *
+from lunch;
 
 -- INHERITANCE IN POSTGRES
 
-create table address (
-    building character(20),
-    street character(50),
-    city CHARACTER(50),
-    country CHARACTER(50)
-);
+create table address (building character(20), street character(50), city CHARACTER(50), country CHARACTER(50));
 
-INSERT INTO ADDRESS VALUES('building 1', 'saket', 'mumbai','bharat' );
+
+INSERT INTO ADDRESS
+VALUES('building 1',
+       'saket',
+       'mumbai',
+       'bharat');
+
+
 INSERT INTO ADDRESS
 VALUES('building 2',
        'old mumbai',
@@ -62,26 +63,40 @@ VALUES('building 2',
        'bharat');
 
 
-create table CustomerData (
-    firstname VARCHAR(50),
-    lastname VARCHAR(50),
-    dob DATE DEFAULT CURRENT_DATE
-) INHERITS (ADDRESS)
+create table CustomerData (firstname VARCHAR(50), lastname VARCHAR(50), dob DATE DEFAULT CURRENT_DATE) INHERITS (ADDRESS)
+select *
+from address;
 
-select * from  address;
+
 select *
 from only address;
 
 
-select * from customerdata;
-INSERT INTO CustomerData VALUES(
-    'building 3',
-'saket',
-'mumbai',
-'bharat',
-'sudeep',
-'patel',
-'today'
-);
+select *
+from customerdata;
 
-SELECT * from CustomerData;
+
+INSERT INTO CustomerData
+VALUES('building 3',
+       'saket',
+       'mumbai',
+       'bharat',
+       'sudeep',
+       'patel',
+       'today');
+
+
+SELECT *
+from CustomerData;
+
+-- sizse of index
+
+SELECT pg_size_pretty(pg_indexes_size ('car_portal_app.
+account_pkey'));
+
+-- curernt time in TRANSACTION
+
+select CURRENT_TIME;
+
+
+select Timeofday();
